@@ -8,21 +8,19 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Entity
-@Table
+@Table(name = "orderlineitems")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderLineItems {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_orders")
-    @SequenceGenerator(
-            name = "seq_orders", allocationSize = 1
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String barCode;
+    private String skuCode;
     private BigDecimal price;
-    private Long quantity;
-    @ManyToOne
-    @JoinColumn(name = "order_id",referencedColumnName = "id")
-    private Order order;
+    private Integer quantity;
+
+//    @ManyToOne
+//    @JoinColumn(name = "order_id",referencedColumnName = "id")
+//    private Order order;
 }

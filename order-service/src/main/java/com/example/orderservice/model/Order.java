@@ -1,10 +1,7 @@
 package com.example.orderservice.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,15 +10,13 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "orders")
+@Builder
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_orders")
-    @SequenceGenerator(
-            name = "seq_orders", allocationSize = 1
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String orderNumber;
-    @OneToMany(mappedBy = "order")
-    private List<OrderLineItems>orderLineItems;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<OrderLineItems> orderLineItemsList;
 
 }
